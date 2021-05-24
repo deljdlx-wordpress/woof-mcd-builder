@@ -1,0 +1,321 @@
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=5,IE=9" ><![endif]-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grapheditor</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="styles/grapheditor.css">
+	<script type="text/javascript">
+		// Parses URL parameters. Supported parameters are:
+		// - lang=xy: Specifies the language of the user interface.
+		// - touch=1: Enables a touch-style user interface.
+		// - storage=local: Enables HTML5 local storage.
+		// - chrome=0: Chromeless mode.
+		var urlParams = (function(url)
+		{
+			var result = new Object();
+			var idx = url.lastIndexOf('?');
+	
+			if (idx > 0)
+			{
+				var params = url.substring(idx + 1).split('&');
+				
+				for (var i = 0; i < params.length; i++)
+				{
+					idx = params[i].indexOf('=');
+					
+					if (idx > 0)
+					{
+						result[params[i].substring(0, idx)] = params[i].substring(idx + 1);
+					}
+				}
+			}
+			
+			return result;
+		})(window.location.href);
+	
+		// Default resources are included in grapheditor resources
+		mxLoadResources = false;
+	</script>
+	<script type="text/javascript" src="js/Init.js"></script>
+	<script type="text/javascript" src="deflate/pako.min.js"></script>
+	<script type="text/javascript" src="deflate/base64.js"></script>
+	<script type="text/javascript" src="jscolor/jscolor.js"></script>
+	<script type="text/javascript" src="sanitizer/sanitizer.min.js"></script>
+	<script type="text/javascript" src="../src/js/mxClient.js"></script>
+	<script type="text/javascript" src="js/EditorUi.js"></script>
+	<script type="text/javascript" src="js/Editor.js"></script>
+	<script type="text/javascript" src="js/Sidebar.js"></script>
+	<script type="text/javascript" src="js/Graph.js"></script>
+	<script type="text/javascript" src="js/Format.js"></script>
+	<script type="text/javascript" src="js/Shapes.js"></script>
+	<script type="text/javascript" src="js/Actions.js"></script>
+	<script type="text/javascript" src="js/Menus.js"></script>
+	<script type="text/javascript" src="js/Toolbar.js"></script>
+	<script type="text/javascript" src="js/Dialogs.js"></script>
+</head>
+<body class="geEditor">
+
+
+	<!--
+	<button style="position: absolute; right: 0; z-index: 1000" id="trigger">Test</button>
+	<div id="preview" style="position: absolute; right: 0; bottom:0; z-index: 100; height: 700px; width: 1000px; border: solid 3px #f00"></div>
+	-->
+
+	<script type="text/javascript">
+		 
+		// Extends EditorUi to update I/O action states based on availability of backend
+		(function()
+		{
+			var editorUiInit = EditorUi.prototype.init;
+
+			// Adds required resources (disables loading of fallback properties, this can only
+			// be used if we know that all keys are defined in the language specific file)
+			mxResources.loadDefaultBundle = false;
+			var bundle = mxResources.getDefaultBundle(RESOURCE_BASE, mxLanguage) ||
+				mxResources.getSpecialBundle(RESOURCE_BASE, mxLanguage);
+
+			// Fixes possible asynchronous requests
+
+			mxUtils.getAll([bundle, STYLE_PATH + '/default.xml'], function(xhr)
+			{
+				// Adds bundle text to resources
+				mxResources.parse(xhr[0].getText());
+				
+				// Configures the default graph theme
+				var themes = new Object();
+				themes[Graph.prototype.defaultThemeName] = xhr[1].getDocumentElement(); 
+				
+				// Main
+				editorUIInstance = new EditorUi(new Editor(false, themes));
+
+
+				xml = `
+				<mxGraphModel dx="552" dy="897" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169">
+					<root>
+						<mxCell id="0" />
+						<mxCell id="1" parent="0" />
+						<mxCell id="8" value="Classname" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+							<mxGeometry x="40" y="90" width="140" height="104" as="geometry" />
+						</mxCell>
+						<mxCell id="9" value="+ field: type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="8">
+							<mxGeometry y="26" width="140" height="26" as="geometry" />
+						</mxCell>
+						<mxCell id="10" value="+ field: type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="8">
+							<mxGeometry y="52" width="140" height="26" as="geometry" />
+						</mxCell>
+						<mxCell id="11" value="+ field: type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="8">
+							<mxGeometry y="78" width="140" height="26" as="geometry" />
+						</mxCell>
+						<mxCell id="12" value="Classname" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+							<mxGeometry x="344" y="310" width="140" height="104" as="geometry" />
+						</mxCell>
+						<mxCell id="13" value="+ field: type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="12">
+							<mxGeometry y="26" width="140" height="26" as="geometry" />
+						</mxCell>
+						<mxCell id="14" value="+ field: type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="12">
+							<mxGeometry y="52" width="140" height="26" as="geometry" />
+						</mxCell>
+						<mxCell id="15" value="+ field: type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="12">
+							<mxGeometry y="78" width="140" height="26" as="geometry" />
+						</mxCell>
+						<mxCell id="16" value="Classname" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+							<mxGeometry x="50" y="310" width="140" height="104" as="geometry" />
+						</mxCell>
+						<mxCell id="17" value="+ field: type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="16">
+							<mxGeometry y="26" width="140" height="26" as="geometry" />
+						</mxCell>
+						<mxCell id="18" value="+ field: type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="16">
+							<mxGeometry y="52" width="140" height="26" as="geometry" />
+						</mxCell>
+						<mxCell id="19" value="+ field: type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="16">
+							<mxGeometry y="78" width="140" height="26" as="geometry" />
+						</mxCell>
+						<mxCell id="20" value="" style="edgeStyle=elbowEdgeStyle;elbow=horizontal;endArrow=classic;html=1;" edge="1" parent="1" source="16" target="8">
+							<mxGeometry width="50" height="50" relative="1" as="geometry">
+								<mxPoint x="200" y="480" as="sourcePoint" />
+								<mxPoint x="250" y="430" as="targetPoint" />
+							</mxGeometry>
+						</mxCell>
+						<mxCell id="21" value="" style="edgeStyle=elbowEdgeStyle;elbow=horizontal;endArrow=classic;html=1;" edge="1" parent="1" source="16" target="12">
+							<mxGeometry width="50" height="50" relative="1" as="geometry">
+								<mxPoint x="200" y="480" as="sourcePoint" />
+								<mxPoint x="250" y="430" as="targetPoint" />
+							</mxGeometry>
+						</mxCell>
+					</root>
+				</mxGraphModel>
+				`;
+
+				var xmlNode = mxUtils.parseXml(xml).documentElement;
+				editorUIInstance.editor.setGraphXml(xmlNode);
+
+
+			}, function()
+			{
+				document.body.innerHTML = '<center style="margin-top:10%;">Error loading resource files. Please check browser console.</center>';
+			});
+
+
+			console.log(mxUtils);
+
+
+			// document.querySelector('#trigger').addEventListener('click', debug);
+
+			// document.addEventListener('DOMContentLoaded', debug);
+
+			function debug()
+			{
+				console.log(editorUIInstance);
+				console.log(editorUIInstance.editor);
+				console.log(editorUIInstance.editor.getGraphXml());
+
+				var xmlNode = editorUIInstance.editor.getGraphXml();
+				xml = `
+				<mxGraphModel dx="1695" dy="1163" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169">
+					<root>
+						<mxCell id="0"></mxCell>
+						<mxCell id="1" parent="0"></mxCell>
+						<mxCell id="2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C847FF;" vertex="1" parent="1">
+							<mxGeometry x="60" y="60" width="120" height="60" as="geometry"></mxGeometry>
+						</mxCell>
+						<mxCell id="3" value="" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;gradientColor=none;fillColor=#5CFF82;" vertex="1" parent="1">
+							<mxGeometry x="310" y="20" width="120" height="80" as="geometry"></mxGeometry>
+						</mxCell>
+						<mxCell id="4" value="" style="endArrow=classic;html=1;" edge="1" parent="1" source="2" target="3">
+							<mxGeometry width="50" height="50" relative="1" as="geometry">
+								<mxPoint x="390" y="610" as="sourcePoint"></mxPoint>
+								<mxPoint x="440" y="560" as="targetPoint"></mxPoint>
+							</mxGeometry>
+						</mxCell>
+						<mxCell id="5" value="" style="shape=dataStorage;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#5CFF82;gradientColor=none;" vertex="1" parent="1">
+							<mxGeometry x="270" y="230" width="100" height="80" as="geometry"></mxGeometry>
+						</mxCell>
+						<mxCell id="6" value="" style="edgeStyle=elbowEdgeStyle;elbow=horizontal;endArrow=classic;html=1;" edge="1" parent="1" source="2" target="5">
+							<mxGeometry width="50" height="50" relative="1" as="geometry">
+								<mxPoint x="390" y="610" as="sourcePoint"></mxPoint>
+								<mxPoint x="440" y="560" as="targetPoint"></mxPoint>
+							</mxGeometry>
+						</mxCell>
+						<mxCell id="7" value="" style="html=1;whiteSpace=wrap;shape=isoCube2;backgroundOutline=1;isoAngle=15;fillColor=#5CFF82;gradientColor=none;" vertex="1" parent="1">
+							<mxGeometry x="414" y="120" width="90" height="100" as="geometry"></mxGeometry>
+						</mxCell>
+						<mxCell id="8" value="" style="image;html=1;image=stencils/clipart/Earth_globe_128x128.png;fillColor=#5CFF82;gradientColor=none;" vertex="1" parent="1">
+							<mxGeometry x="250" y="110" width="80" height="80" as="geometry"></mxGeometry>
+						</mxCell>
+					</root>
+				</mxGraphModel>
+				`;
+				
+				// var tmp = document.createElement("div");
+				// tmp.appendChild(xmlNode);
+				// var xml = tmp.innerHTML;
+
+				var node = document.getElementById('preview');
+				node.innerHTML = '';
+
+				var doc = mxUtils.parseXml(xml);
+
+				editor = new Editor();
+				editor.graph = new mxGraph(node);
+				// console.log(e)
+				editor.setGraphXml(xmlNode);
+				// editor.updateGraphComponents();
+				// editor.graph = new mxGraph(node);
+				// editor.graph.setConnectable(true);
+
+				/*
+				var doc = mxUtils.parseXml(xml);
+				var codec = new mxCodec(doc);
+
+				codec.decode(doc.documentElement, editor.graph.getModel());
+
+
+                var elt = doc.documentElement.firstChild;
+				var cells = [];
+
+				while (elt != null){                
+
+					let cell = codec.decode(elt)
+					if(cell != undefined){
+						if(cell.id != undefined && cell.parent != undefined && (cell.id == cell.parent)){
+							elt = elt.nextSibling;
+							continue;
+						}
+						cells.push(cell);
+					}
+					elt = elt.nextSibling;
+                }
+                editor.graph.addCells(cells);
+				*/
+
+
+				
+
+				/*
+				var doc = mxUtils.parseXml(
+					'<mxGraphModel><root><MyDiagram id="0"><mxCell/></MyDiagram>'+
+					'<MyLayer id="1"><mxCell parent="0" /></MyLayer><MyObject id="2">'+
+					'<mxCell style="strokeColor=blue;fillColor=red" parent="1" vertex="1">'+
+					'<mxGeometry value="toto" x="10" y="10" width="80" height="30" as="geometry"/>'+
+					'</mxCell></MyObject></root></mxGraphModel>'
+  				);
+				var codec = new mxCodec(doc);
+				*/
+
+
+
+				/*
+
+				var node = document.getElementById('preview');
+				node.innerHTML = '';
+				var graph = new mxGraph(node);
+				console.log(graph);
+
+				var codec = new mxCodec(doc);
+				codec.decode(doc.documentElement, graph.getModel());
+
+                var elt = doc.documentElement.firstChild;
+				var cells = [];
+
+				while (elt != null){                
+
+					let cell = codec.decode(elt)
+					if(cell != undefined){
+						if(cell.id != undefined && cell.parent != undefined && (cell.id == cell.parent)){
+							elt = elt.nextSibling;
+							continue;
+						}
+						cells.push(cell);
+					}
+					elt = elt.nextSibling;
+                }
+                graph.addCells(cells);
+				*/
+
+
+				// console.log(graph.setModel);
+
+				// console.log(doc.documentElement);
+				// graph.setGraphXml(doc.documentElement);
+				// editor.readGraphModel(node);
+				// preview
+				// console.log(editorUIInstance.save())
+			}
+
+
+
+
+
+		})();
+	</script>
+
+
+<script>
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Woof\\SchemaBuilder\\": "./class"
+        }
+    },
+    "config": {
+        "vendor-dir": "static-vendor"
+    }
+}
