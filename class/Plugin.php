@@ -1,6 +1,6 @@
 <?php
 
-namespace Woof\SchemaBuilder;
+namespace WoofSchemaBuilder;
 
 use Woof\Plugin as WoofPlugin;
 
@@ -12,7 +12,6 @@ class Plugin extends WoofPlugin
     public function __construct($filepath)
     {
         parent::__construct($filepath);
-
         $this->pageManager = new Administration();
     }
 

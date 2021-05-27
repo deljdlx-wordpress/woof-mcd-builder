@@ -517,7 +517,7 @@ Editor.prototype.setGraphXml = function(node)
 	if (node != null)
 	{
 		var dec = new mxCodec(node.ownerDocument);
-	
+
 		if (node.nodeName == 'mxGraphModel')
 		{
 			this.graph.model.beginUpdate();
@@ -527,7 +527,9 @@ Editor.prototype.setGraphXml = function(node)
 				this.graph.model.clear();
 				this.graph.view.scale = 1;
 				this.readGraphState(node);
+
 				this.updateGraphComponents();
+
 				dec.decode(node, this.graph.getModel());
 			}
 			finally

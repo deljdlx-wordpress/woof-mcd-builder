@@ -5,7 +5,7 @@
  * Author: Julien Delsescaux
  */
 
-use Woof\SchemaBuilder\Plugin;
+use WoofSchemaBuilder\Plugin;
 
 require __DIR__ .'/static-vendor/autoload.php';
 require __DIR__ .'/../woof/autoload.php';

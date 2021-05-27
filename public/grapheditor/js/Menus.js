@@ -62,7 +62,7 @@ Menus.prototype.init = function()
 				{
 					elt.removeAttribute('face');
 					elt.style.fontFamily = null;
-					
+
 					if (elt.nodeName == 'PRE')
 					{
 						graph.replaceElement(elt, 'div');
@@ -71,23 +71,23 @@ Menus.prototype.init = function()
 			});
 			tr.firstChild.nextSibling.style.fontFamily = fontname;
 		});
-		
+
 		for (var i = 0; i < this.defaultFonts.length; i++)
 		{
 			addItem(this.defaultFonts[i]);
 		}
 
 		menu.addSeparator(parent);
-		
+
 		if (this.customFonts.length > 0)
 		{
 			for (var i = 0; i < this.customFonts.length; i++)
 			{
 				addItem(this.customFonts[i]);
 			}
-			
+
 			menu.addSeparator(parent);
-			
+
 			menu.addItem(mxResources.get('reset'), null, mxUtils.bind(this, function()
 			{
 				this.customFonts = [];

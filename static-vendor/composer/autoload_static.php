@@ -9,12 +9,12 @@ class ComposerStaticInit69f78bc9fe54b761b6a3eb904fe8fe01
     public static $prefixLengthsPsr4 = array (
         'W' => 
         array (
-            'Woof\\SchemaBuilder\\' => 19,
+            'WoofSchemaBuilder\\' => 18,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Woof\\SchemaBuilder\\' => 
+        'WoofSchemaBuilder\\' => 
         array (
             0 => __DIR__ . '/../..' . '/class',
         ),

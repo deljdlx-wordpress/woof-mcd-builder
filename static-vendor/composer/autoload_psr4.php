@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Woof\\SchemaBuilder\\' => array($baseDir . '/class'),
+    'WoofSchemaBuilder\\' => array($baseDir . '/class'),
 );

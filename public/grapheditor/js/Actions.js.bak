@@ -14,8 +14,12 @@ function Actions(editorUi)
 /**
  * Adds the default actions.
  */
+
+
+
 Actions.prototype.init = function()
 {
+
 	var ui = this.editorUi;
 	var editor = ui.editor;
 	var graph = editor.graph;
@@ -25,14 +29,18 @@ Actions.prototype.init = function()
 	};
 
 	// File actions
+
+
 	this.addAction('new...', function() { graph.openLink(ui.getUrl()); });
 	this.addAction('open...', function()
 	{
 		window.openNew = true;
 		window.openKey = 'open';
-		
+
 		ui.openFile();
 	});
+
+
 	this.addAction('import...', function()
 	{
 		window.openNew = false;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Woof\SchemaBuilder;
+namespace WoofSchemaBuilder;
 
 use Woof\Administration as WoofAdministration;
 
@@ -26,7 +26,6 @@ class Administration extends WoofAdministration
             'woof-administration-schema-builder',    // slug
             'woof-schema-builder'       // parent
         );
-
     }
 
     public function displaySchemaBuilderPage()
@@ -36,6 +35,7 @@ class Administration extends WoofAdministration
 
     public function woofShemaBuilderHome()
     {
+
         echo $this->loadTemplate(__DIR__ . '/../views/admin-schema-home.php');
 
     }
