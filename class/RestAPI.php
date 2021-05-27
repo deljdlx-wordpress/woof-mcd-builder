@@ -46,6 +46,7 @@ class RestAPI extends WoofRestApi
 
     public function save(WP_REST_Request $request)
     {
+        // IMPORTANT nonce rest call validation
         $nonce = $request->get_header('X-WP-Nonce');
         wp_verify_nonce($nonce, 'wp_rest');
 
