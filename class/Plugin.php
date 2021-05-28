@@ -12,7 +12,7 @@ class Plugin extends WoofPlugin
     public function __construct($filepath)
     {
         parent::__construct($filepath);
-        $this->pageManager = new Administration();
+        $this->pageManager = new AdministrationSection();
     }
 
     public function registerPostTypes()

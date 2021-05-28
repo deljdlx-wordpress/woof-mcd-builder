@@ -2,11 +2,11 @@
 
 namespace WoofSchemaBuilder;
 
-use Woof\Administration as WoofAdministration;
+use Woof\AdministrationSection as WoofAdministrationSection;
 
 use function Woof\slugify;
 
-class Administration extends WoofAdministration
+class AdministrationSection extends WoofAdministrationSection
 {
 
 
