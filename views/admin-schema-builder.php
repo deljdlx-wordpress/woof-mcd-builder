@@ -56,41 +56,51 @@ echo '</script>';
 ?>
 
 <?php
-echo '<link rel="stylesheet" type="text/css" href="' . plugin_dir_url(__DIR__) . '/public/grapheditor/styles/grapheditor.css">';
 
-
-$scripts = [
-    'js/Init.js',
-    'deflate/pako.min.js',
-    'deflate/base64.js',
-    'jscolor/jscolor.js',
-    'sanitizer/sanitizer.min.js',
-    '../assets/mxgraph/src/js/mxClient.js',
-    'js/EditorUi.js',
-    'js/Editor.js',
-    'js/Sidebar.js',
-    'js/Graph.js',
-    'js/Format.js',
-    'js/Shapes.js',
-    'js/Actions.js',
-    'js/Menus.js',
-    'js/Toolbar.js',
-    'js/Dialogs.js',
-    'woof/WoofSchemaEditor.js',
-    'woof/Application.js',
-
-
-    'woof/bootstrap.js',
-];
-
-foreach($scripts as $source) {
-    echo '<script type="text/javascript" src="' . plugin_dir_url(__DIR__) . '/public/grapheditor/' . $source . '"></script>' . PHP_EOL;
-}
 ?>
 
-<style>
 
-</style>
+<script>
+// custom.js
+document.addEventListener('DOMContentLoaded', () => {
+
+    console.log('DOMContentLoaded');
+
+    jQuery(function($) {
+        var $info = jQuery("#modal-content");
+        $info.dialog({
+            'dialogClass'   : 'wp-dialog',
+            'modal'         : true,
+            'autoOpen'      : false,
+            'closeOnEscape' : true,
+            'buttons'       : {
+                "Close": function() {
+                    jQuery(this).dialog('close');
+                }
+            }
+        });
+        jQuery("#open-modal").click(function(event) {
+            event.preventDefault();
+
+            console.log('open');
+
+            $info.dialog('open');
+        });
+    });
+})
+
+
+</script>
+
+
+<button id="open-modal">open</button>
+
+
+
+
+<div id="modal-content">
+hello world
+</div>
 
 
 <div class="woof-schema-editor geEditor"></div>
