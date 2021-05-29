@@ -70,12 +70,16 @@ class RestAPI extends WoofRestApi
 
         if($currentUserId) {
             $data = $this->getPostData();
-            $xml = $data['xml'];
-                $this->createPost('woof-schema', [
-                'title' => 'test schema',
-                'content' => $xml
-            ]);
-            return $data;
+
+            if($data['postId']) {
+                $post = $this->update($data);
+            }
+            else {
+                $post = $this->insert($data);
+            }
+
+
+            return $post;
         }
         else {
             return [
@@ -84,5 +88,25 @@ class RestAPI extends WoofRestApi
                 'nonce' => $request->get_header('X-WP-Nonce'),
             ];
         }
+    }
+
+    public function update($data)
+    {
+        $xml = $data['xml'];
+        return $this->updatePost(
+            $data['postId'],
+            [
+                'post_content' => $xml
+            ]
+        );
+    }
+
+    protected function insert($data)
+    {
+        $xml = $data['xml'];
+        $this->createPost('woof-schema', [
+            'title' => 'test schema',
+            'content' => $xml
+        ]);
     }
 }

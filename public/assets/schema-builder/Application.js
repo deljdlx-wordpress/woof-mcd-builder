@@ -31,7 +31,8 @@ class Application
       this.post(
         this._configuration.apiBaseURL + '/save',
         {
-          xml: this.getXML()
+          xml: this.getXML(),
+          postId: this._configuration.postId
         }
       )
 
