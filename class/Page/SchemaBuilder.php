@@ -9,13 +9,34 @@ use function Woof\slugify;
 class SchemaBuilder extends AdministrationPage
 {
 
+    protected $template = '/views/admin-schema-builder.php';
+
+
+    public function display($args = [])
+    {
+
+        $args = [];
+        $args['nonce'] = wp_create_nonce( 'wp_rest' );
+
+        $args['postId'] = filter_input(INPUT_GET, 'post');
+        $args['baseURL'] = get_home_url();
+        $args['apiBaseURL'] = get_home_url() . '/wp-json/woof-shema-builder/v1';
+        $args['wpApiBaseURL'] = get_home_url() . '/wp-json/wp/v2';
+
+
+
+
+        parent::display($args);
+    }
+
+
     public function addAssets()
     {
-        $this->setTemplate('/views/admin-schema-builder.php');
-        
         parent::addAssets();
         $scripts = [
-            '/assets/grapheditor/js/Init.js',
+
+            '/assets/schema-builder/initGraphEditor.js',
+
             '/assets/grapheditor/deflate/pako.min.js',
             '/assets/grapheditor/deflate/base64.js',
             '/assets/grapheditor/jscolor/jscolor.js',

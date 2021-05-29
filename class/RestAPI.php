@@ -34,6 +34,13 @@ class RestAPI extends WoofRestApi
             [$this, 'save'],
             true
         );
+
+        $this->addRoute(
+            'GET',
+            '/save',
+            [$this, 'saveHowto'],
+            true
+        );
     }
 
     public function about() {
@@ -41,6 +48,11 @@ class RestAPI extends WoofRestApi
             'version' => '1.0',
             'name' => 'caniche'
         ];
+    }
+
+    public function saveHowto()
+    {
+        return 'hello world';
     }
 
 

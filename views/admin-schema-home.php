@@ -8,9 +8,15 @@ if (! class_exists('WP_List_Table')) {
 
 
 
-
-
-
 $myListTable = new PostListTable('woof-schema');
+
+
+$myListTable->setEditURLCallBack(function($item) {
+    return sprintf('<a href="?page=woof-schema-builder--builder&post=%s">Edit</a>', $item['id']);
+});
+
+
+
+
 $myListTable->prepareItems();
 $myListTable->display();

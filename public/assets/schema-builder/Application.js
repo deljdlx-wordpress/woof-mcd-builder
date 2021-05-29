@@ -6,12 +6,17 @@ class Application
 
   _baseURL;
 
+  _configuration;
 
-  constructor(container, baseURL) {
-    this._containerElement = container;
-		this._shemaEditor = new WoofShemaEditor(this._containerElement);
-    this._baseURL = baseURL;
 
+  constructor(configuration) {
+
+    this._configuration = configuration;
+    console.log(this._configuration);
+
+    this._containerElement = document.querySelector(this._configuration.element);
+    this._baseURL = this._configuration.apiBaseURL;
+    this._shemaEditor = new WoofShemaEditor(this._containerElement);
 
 		this._initialize();
   }
@@ -24,8 +29,7 @@ class Application
       console.log(this.getXML());
 
       this.post(
-        this._baseURL + '/wp-json/woof-shema-builder/v1/save',
-        // 'http://localhost/deploy-wordpress-sample/public/wp-json/woof-shema-builder/v1/save?_wpnonce=' + window.WP_API_NONCE,
+        this._configuration.apiBaseURL + '/save',
         {
           xml: this.getXML()
         }
@@ -94,8 +98,8 @@ class Application
 
     currentOptions.headers = {};
 
-    if(window.WP_API_NONCE) {
-      currentOptions.headers['X-WP-Nonce'] = window.WP_API_NONCE;
+    if(this._configuration.nonce) {
+      currentOptions.headers['X-WP-Nonce'] = this._configuration.nonce;
     }
 
 
