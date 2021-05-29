@@ -12,5 +12,5 @@ if (! class_exists('WP_List_Table')) {
 
 
 $myListTable = new PostListTable('woof-schema');
-$myListTable->prepare_items();
+$myListTable->prepareItems();
 $myListTable->display();
