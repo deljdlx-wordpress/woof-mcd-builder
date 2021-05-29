@@ -10,10 +10,10 @@ class AdministrationSection extends WoofAdministrationSection
 {
 
 
-    public function __construct()
+    public function __construct($plugin)
     {
 
-        parent::__construct();
+        parent::__construct($plugin);
 
         $this->addPage(
             'Woof schema builder',        // label
@@ -32,33 +32,34 @@ class AdministrationSection extends WoofAdministrationSection
     public function addAssets()
     {
         parent::addAssets();
+        return;
 
         $scripts = [
-            'js/Init.js',
-            'deflate/pako.min.js',
-            'deflate/base64.js',
-            'jscolor/jscolor.js',
-            'sanitizer/sanitizer.min.js',
-            '../assets/mxgraph/src/js/mxClient.js',
-            'js/EditorUi.js',
-            'js/Editor.js',
-            'js/Sidebar.js',
-            'js/Graph.js',
-            'js/Format.js',
-            'js/Shapes.js',
-            'js/Actions.js',
-            'js/Menus.js',
-            'js/Toolbar.js',
-            'js/Dialogs.js',
-            'woof/WoofSchemaEditor.js',
-            'woof/Application.js',
+            '/assets/grapheditor/js/Init.js',
+            '/assets/grapheditor/deflate/pako.min.js',
+            '/assets/grapheditor/deflate/base64.js',
+            '/assets/grapheditor/jscolor/jscolor.js',
+            '/assets/grapheditor/sanitizer/sanitizer.min.js',
+            '/assets/mxgraph/src/js/mxClient.js',
+            '/assets/grapheditor/js/EditorUi.js',
+            '/assets/grapheditor/js/Editor.js',
+            '/assets/grapheditor/js/Sidebar.js',
+            '/assets/grapheditor/js/Graph.js',
+            '/assets/grapheditor/js/Format.js',
+            '/assets/grapheditor/js/Shapes.js',
+            '/assets/grapheditor/js/Actions.js',
+            '/assets/grapheditor/js/Menus.js',
+            '/assets/grapheditor/js/Toolbar.js',
+            '/assets/grapheditor/js/Dialogs.js',
 
-            'woof/bootstrap.js'
+            '/assets/schema-builder/WoofSchemaEditor.js',
+            '/assets/schema-builder/Application.js',
+            '/assets/schema-builder/bootstrap.js'
         ];
         foreach($scripts as $script) {
             $this->addScript(
                 slugify($script),
-                $this->getPluginURL() . '/public/grapheditor/' . $script,
+                $this->getPluginURL() . '/public' . $script,
                 null,
                 null,
                 true
@@ -68,23 +69,27 @@ class AdministrationSection extends WoofAdministrationSection
 
         $this->addCSS(
             'grapheditor.css',
-            $this->getPluginURL() . '/public/grapheditor/styles/grapheditor.css'
+            $this->getPluginURL() . '/public/assets/grapheditor/styles/grapheditor.css'
+        );
+
+        $this->addCSS(
+            'schema-builder.css',
+            $this->getPluginURL() . '/public/assets/schema-builder/css/schema-builder.css'
         );
     }
 
-
-
     public function displaySchemaBuilderPage()
     {
-        echo $this->loadTemplate(__DIR__ . '/../views/admin-schema-builder.php');
+        $template = $this->loadTemplate(__DIR__ . '/../views/admin-schema-builder.php');
+        echo $template;
     }
 
     public function woofShemaBuilderHome()
     {
 
-        echo $this->loadTemplate(__DIR__ . '/../views/admin-schema-home.php');
+        $template = $this->loadTemplate(__DIR__ . '/../views/admin-schema-home.php');
+        echo $template;
 
     }
-
 }
 

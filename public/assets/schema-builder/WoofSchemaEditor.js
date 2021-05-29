@@ -22,12 +22,6 @@ class WoofShemaEditor
     this._editorUiInit = EditorUi.prototype.init;
 
 
-
-
-
-
-
-
     // Adds required resources (disables loading of fallback properties, this can only
     // be used if we know that all keys are defined in the language specific file)
     mxResources.loadDefaultBundle = false;

@@ -4,9 +4,15 @@ class Application
   _containerElement;
   _shemaEditor;
 
-  constructor(container) {
+  _baseURL;
+
+
+  constructor(container, baseURL) {
     this._containerElement = container;
 		this._shemaEditor = new WoofShemaEditor(this._containerElement);
+    this._baseURL = baseURL;
+
+
 		this._initialize();
   }
 
@@ -18,7 +24,7 @@ class Application
       console.log(this.getXML());
 
       this.post(
-        'http://localhost/deploy-wordpress-sample/public/wp-json/woof-shema-builder/v1/save',
+        this._baseURL + '/wp-json/woof-shema-builder/v1/save',
         // 'http://localhost/deploy-wordpress-sample/public/wp-json/woof-shema-builder/v1/save?_wpnonce=' + window.WP_API_NONCE,
         {
           xml: this.getXML()
@@ -32,15 +38,26 @@ class Application
     return this._shemaEditor.getXML();
   }
 
+  async loadFromApi(url) {
+    let response = await this.get(url);
+
+    let xml = response.content.rendered;
+    xml = xml.replace(/.*?(<mxGraphModel.*?<\/mxGraphModel>).*/i, '$1');
+
+    this.loadXML(xml)
+  }
+
   loadXML(xml) {
     this._shemaEditor.loadXML(xml);
     return this;
   }
 
 
+  /*
   save() {
-    // this._shemaEditor.
+    this._shemaEditor.save()
   }
+  */
 
 
   run(callback) {
@@ -51,11 +68,11 @@ class Application
 
 
   async get(url, options = {}) {
-    const response = await this.ajax('GET', url, options);
+    const response = await this.ajax('GET', url, null, options);
     return response;
   }
 
-  async post(url, data = {}, options = {}) {
+  async post(url, data = null, options = {}) {
     const response = await this.ajax('POST', url, data, options);
     return response;
   }
