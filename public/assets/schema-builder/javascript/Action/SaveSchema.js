@@ -10,6 +10,28 @@ class SaveSchema extends ApplicationAction
   constructor(manager) {
     super(manager);
 
+
+    window.addEventListener("keyup", (event) => {
+
+      console.log(event.key)
+      console.log(event.ctrlKey);
+
+
+      if(event.key == 's' && event.ctrlKey) {
+        this.run();
+      }
+
+      /*
+      if (!(event.key == 's' && event.ctrlKey) && !(event.which == 19)) return true
+      alert("Ctrl-S pressed")
+      event.preventDefault()
+      return false
+      */
+    })
+
+
+
+
     this._modal = jQuery("#modal-save-graph");
     this._titleElement = document.querySelector('#graph-title');
     this._excerptElement = document.querySelector('#graph-excerpt');
@@ -47,7 +69,7 @@ class SaveSchema extends ApplicationAction
 
 
   run() {
-    if(this._application.getSchema().getId() && 0) {
+    if(this._application.getSchema().getId()) {
       this._application.getSchema().save();
     }
     else {
