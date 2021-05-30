@@ -55,6 +55,8 @@ class SchemaBuilder extends AdministrationPage
 
             '/assets/schema-builder/WoofSchemaEditor.js',
             '/assets/schema-builder/Application.js',
+            '/assets/schema-builder/ApplicationActions.js',
+            '/assets/schema-builder/Schema.js',
             '/assets/schema-builder/bootstrap.js'
         ];
         foreach($scripts as $script) {

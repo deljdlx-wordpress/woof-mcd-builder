@@ -2,74 +2,61 @@ class Application
 {
 
   _containerElement;
-  _shemaEditor;
+
+  _schemaEditor;
+  _schema;
 
   _baseURL;
 
   _configuration;
 
 
+  _actions;
+
   constructor(configuration) {
 
     this._configuration = configuration;
     console.log(this._configuration);
 
+    this._actions = new ApplicationActions(this);
+
     this._containerElement = document.querySelector(this._configuration.element);
     this._baseURL = this._configuration.apiBaseURL;
-    this._shemaEditor = new WoofShemaEditor(this._containerElement);
 
+
+    this._schemaEditor = new WoofShemaEditor(this._containerElement);
+    this._schema = new Schema(this);
+
+    this._initializeDom();
 		this._initialize();
-  }
 
+  }
 
 
   _initialize() {
-    this._shemaEditor.addEventListener('save', () => {
-      console.log('%c' + "saving data", 'color: #0bf; font-size: 1rem; background-color:#fff');
-      console.log(this.getXML());
-
-      this.post(
-        this._configuration.apiBaseURL + '/save',
-        {
-          xml: this.getXML(),
-          postId: this._configuration.postId
-        }
-      )
-
+    this._schemaEditor.addEventListener('save', () => {
+      this._actions.openSavePopup();
     });
   }
 
-  getXML() {
-    return this._shemaEditor.getXML();
+  _initializeDom() {
+
   }
 
-  async loadFromApi(url) {
-    let response = await this.get(url);
-
-    let xml = response.content.rendered;
-    xml = xml.replace(/.*?(<mxGraphModel.*?<\/mxGraphModel>).*/i, '$1');
-
-    this.loadXML(xml)
-  }
-
-  loadXML(xml) {
-    this._shemaEditor.loadXML(xml);
-    return this;
+  getSchema() {
+    return this._schema;
   }
 
 
-  /*
-  save() {
-    this._shemaEditor.save()
+  getEditor() {
+    return this._schemaEditor;
   }
-  */
 
 
   run(callback) {
-    this._shemaEditor.addEventListener('run', callback);
-    this._shemaEditor.run();
+    this._schemaEditor.addEventListener('run', callback);
+    this._schemaEditor.run();
   }
-
 
 
   async get(url, options = {}) {
@@ -92,10 +79,6 @@ class Application
       redirect: 'follow', // manual, *follow, error
       referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     };
-
-
-
-    // console.log('%c' + window.WP_API_NONCE, 'color: #0bf; font-size: 1rem; background-color:#fff');
 
     currentOptions.headers = {};
 

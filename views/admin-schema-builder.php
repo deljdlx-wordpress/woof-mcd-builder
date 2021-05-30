@@ -1,6 +1,15 @@
-<button id="open-modal">open</button>
-<div id="modal-content">
-hello world
+
+<div id="modal-save-graph" class="modal">
+    <form>
+        <div>
+            <label>Title <input name="graph-title" id="graph-title"/></label>
+        </div>
+
+        <div>
+            <label>Description <textarea name="graph-description" id="graph-excerpt"></textarea></label>
+        </div>
+
+    </form>
 </div>
 
 

@@ -10,6 +10,7 @@ class Plugin extends WoofPlugin
 
     public function registerPostTypes()
     {
-        $this->createPostType('Woof schema', 'woof-schema');
+        $postType = $this->createPostType('Woof schema', 'woof-schema');
+        $postType->enableExcerpt();
     }
 }

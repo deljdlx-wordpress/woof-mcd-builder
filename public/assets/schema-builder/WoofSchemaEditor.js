@@ -61,7 +61,7 @@ class WoofShemaEditor
   _initializeEvents() {
     this._editorUIInstance.actions.addAction('save', () => {
       this.executeListeners('save');
-      // console.log(this.getXML());
+      this._editorUIInstance.editor.setModified(false);
     });
   }
 
@@ -92,10 +92,14 @@ class WoofShemaEditor
   }
 
   loadXMLNode(node) {
-    // NOTICE fonction aussi editorUIInstance.editor.setGraphXml(node);
+    // NOTICE fonctionne aussi editorUIInstance.editor.setGraphXml(node);
+    /*
     this._editorUIInstance.editor.graph.setSelectionCells(
       this._editorUIInstance.editor.graph.importGraphModel(node)
     );
+    */
+
+    this._editorUIInstance.editor.graph.importGraphModel(node)
     this._editorUIInstance.editor.setModified(false);
   }
 

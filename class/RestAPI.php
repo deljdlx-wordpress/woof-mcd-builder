@@ -58,15 +58,7 @@ class RestAPI extends WoofRestApi
 
     public function save(WP_REST_Request $request)
     {
-        // IMPORTANT nonce rest call validation
-        $nonce = $request->get_header('X-WP-Nonce');
-        wp_verify_nonce($nonce, 'wp_rest');
-
-        $currentUserId = get_current_user_id();
-
-        // NOTICE check if _wpnonce was sent in POST/GET paramter
-        // $check = check_ajax_referer( 'wp_rest', '_wpnonce', false );
-
+        $currentUserId = $this->getUserIdFromNonce($request);
 
         if($currentUserId) {
             $data = $this->getPostData();
@@ -105,8 +97,9 @@ class RestAPI extends WoofRestApi
     {
         $xml = $data['xml'];
         $this->createPost('woof-schema', [
-            'title' => 'test schema',
-            'content' => $xml
+            'post_title' => $data['title'],
+            'post_excerpt' => $data['excerpt'],
+            'post_content' => $xml
         ]);
     }
 }
