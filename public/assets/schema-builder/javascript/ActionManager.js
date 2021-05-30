@@ -6,7 +6,13 @@ class ActionManager
 
   constructor(application) {
     this._application = application;
+
+    this.shortcutManager = new KeyboardShortcuts(this);
+
+
+
     this._actions['save'] = new SaveSchema(this);
+
   }
 
 

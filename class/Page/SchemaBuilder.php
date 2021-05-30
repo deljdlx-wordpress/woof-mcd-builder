@@ -57,7 +57,9 @@ class SchemaBuilder extends AdministrationPage
             '/assets/schema-builder/javascript/Application.js',
 
             '/assets/schema-builder/javascript/ActionManager.js',
+            '/assets/schema-builder/javascript/KeyboardShorcuts.js',
             '/assets/schema-builder/javascript/Action/ApplicationAction.js',
+            '/assets/schema-builder/javascript/ActionManager.js',
             '/assets/schema-builder/javascript/Action/SaveSchema.js',
 
             '/assets/schema-builder/javascript/Schema.js',

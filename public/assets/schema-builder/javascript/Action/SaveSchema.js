@@ -11,23 +11,7 @@ class SaveSchema extends ApplicationAction
     super(manager);
 
 
-    window.addEventListener("keyup", (event) => {
 
-      console.log(event.key)
-      console.log(event.ctrlKey);
-
-
-      if(event.key == 's' && event.ctrlKey) {
-        this.run();
-      }
-
-      /*
-      if (!(event.key == 's' && event.ctrlKey) && !(event.which == 19)) return true
-      alert("Ctrl-S pressed")
-      event.preventDefault()
-      return false
-      */
-    })
 
 
 
