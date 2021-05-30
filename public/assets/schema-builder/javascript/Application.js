@@ -18,7 +18,9 @@ class Application
     this._configuration = configuration;
     console.log(this._configuration);
 
-    this._actions = new ApplicationActions(this);
+    this._actions = new ActionManager(this);
+
+
 
     this._containerElement = document.querySelector(this._configuration.element);
     this._baseURL = this._configuration.apiBaseURL;
@@ -35,7 +37,7 @@ class Application
 
   _initialize() {
     this._schemaEditor.addEventListener('save', () => {
-      this._actions.openSavePopup();
+      this._actions.saveSchema();
     });
   }
 

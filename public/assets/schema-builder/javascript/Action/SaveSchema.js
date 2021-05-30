@@ -1,18 +1,8 @@
-class ApplicationActions
+class SaveSchema extends ApplicationAction
 {
 
-  _application;
-  _modals = {};
 
-
-  constructor(application) {
-    this._application = application;
-
-    this._initializeDom();
-  }
-
-
-  openSavePopup() {
+  run() {
     if(this._application.getSchema().getId() && 0) {
       this._application.getSchema().save();
     }
@@ -34,6 +24,7 @@ class ApplicationActions
 
 
   _initializeDom() {
+    super._initializeDom;
     this._initializeSavePopup();
   }
 

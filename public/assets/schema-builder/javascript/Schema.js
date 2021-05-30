@@ -18,15 +18,22 @@ class Schema
   }
 
   getXML() {
-    this.setXML(this._application.getEditor().getXML());
+    this._xml = this._application.getEditor().getXML();
     return this._xml;
   }
 
   setXML(xml) {
     this._xml = xml.replace(/.*?(<mxGraphModel.*?<\/mxGraphModel>).*/i, '$1');
-    this.loadXML(this._xml);
+    this._application.getEditor().loadXML(this._xml);
     return this;
   }
+
+
+  loadXML(xml) {
+    this._application.getEditor().loadXML(xml);
+    return this;
+  }
+
 
   setTitle(title) {
     this._title = title;
@@ -74,20 +81,17 @@ class Schema
   }
 
 
-  loadXML(xml) {
-    this._application.getEditor().loadXML(xml);
-    return this;
-  }
-
   async loadFromApi(url) {
+
     let response = await this._application.get(url);
     let xml = response.content.rendered;
 
     this.setXML(xml);
+    this.setExcerpt(response.excerpt.rendered);
     this.setTitle(response.title.rendered);
     this.setId(response.id)
 
-    this.setExcerpt(response.excerpt.rendered);
+
   }
 
 }

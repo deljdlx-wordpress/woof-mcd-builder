@@ -35,7 +35,7 @@ class SchemaBuilder extends AdministrationPage
         parent::addAssets();
         $scripts = [
 
-            '/assets/schema-builder/initGraphEditor.js',
+            '/assets/schema-builder/javascript/initGraphEditor.js',
 
             '/assets/grapheditor/deflate/pako.min.js',
             '/assets/grapheditor/deflate/base64.js',
@@ -53,11 +53,15 @@ class SchemaBuilder extends AdministrationPage
             '/assets/grapheditor/js/Toolbar.js',
             '/assets/grapheditor/js/Dialogs.js',
 
-            '/assets/schema-builder/WoofSchemaEditor.js',
-            '/assets/schema-builder/Application.js',
-            '/assets/schema-builder/ApplicationActions.js',
-            '/assets/schema-builder/Schema.js',
-            '/assets/schema-builder/bootstrap.js'
+            '/assets/schema-builder/javascript/WoofSchemaEditor.js',
+            '/assets/schema-builder/javascript/Application.js',
+
+            '/assets/schema-builder/javascript/ActionManager.js',
+            '/assets/schema-builder/javascript/Action/ApplicationAction.js',
+            '/assets/schema-builder/javascript/Action/SaveSchema.js',
+
+            '/assets/schema-builder/javascript/Schema.js',
+            '/assets/schema-builder/javascript/bootstrap.js'
         ];
         foreach($scripts as $script) {
             $this->addScript(
