@@ -10,8 +10,10 @@ class SaveSchema extends ApplicationAction
   constructor(manager) {
     super(manager);
 
-
     this._modal = jQuery("#modal-save-graph");
+    this._titleElement = document.querySelector('#graph-title');
+    this._excerptElement = document.querySelector('#graph-excerpt');
+
     this._modal.dialog({
         'dialogClass'   : 'wp-dialog',
         'modal'         : true,
@@ -33,26 +35,20 @@ class SaveSchema extends ApplicationAction
           }
         }
     });
-
-    this._titleElement = document.querySelector('#graph-title');
-    this._excerptElement = document.querySelector('#graph-excerpt');
-
   }
+
 
   run() {
     if(this._application.getSchema().getId() && 0) {
       this._application.getSchema().save();
     }
     else {
-      console.log('Opening Save popup');
-
 
       let title = this._application.getSchema().getTitle();
       let excerpt = this._application.getSchema().getExcerpt();
 
-      this.getTitleElement().value = title;
-      this.getExcerptElement().value = excerpt;
-
+      this._titleElement.value = title;
+      this._excerptElement.value = excerpt;
 
       this._modal.dialog('open');
     }
