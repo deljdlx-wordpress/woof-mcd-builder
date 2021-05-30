@@ -12,5 +12,6 @@ class Plugin extends WoofPlugin
     {
         $postType = $this->createPostType('Woof schema', 'woof-schema');
         $postType->enableExcerpt();
+        $postType->hideFromMenu();
     }
 }

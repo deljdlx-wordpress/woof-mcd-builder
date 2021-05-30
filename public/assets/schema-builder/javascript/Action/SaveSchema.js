@@ -38,6 +38,14 @@ class SaveSchema extends ApplicationAction
   }
 
 
+  _initializeDom() {
+    document.querySelector('#save-graph-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      this._application.getSchema().save();
+    });
+  }
+
+
   run() {
     if(this._application.getSchema().getId() && 0) {
       this._application.getSchema().save();

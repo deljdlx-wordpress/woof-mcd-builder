@@ -1,6 +1,6 @@
 
 <div id="modal-save-graph" class="modal">
-    <form>
+    <form id="save-graph-form">
         <div>
             <label>Title <input name="graph-title" id="graph-title"/></label>
         </div>
