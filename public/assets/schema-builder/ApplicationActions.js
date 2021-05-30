@@ -13,39 +13,23 @@ class ApplicationActions
 
 
   openSavePopup() {
-    if(this._application.getSchema().getId()) {
+    if(this._application.getSchema().getId() && 0) {
       this._application.getSchema().save();
     }
     else {
       console.log('Opening Save popup');
+
+
+      let title = this._application.getSchema().getTitle();
+      let excerpt = this._application.getSchema().getExcerpt();
+
+      document.querySelector('#graph-title').value = title;
+      document.querySelector('#graph-excerpt').value = excerpt;
+
+
       this._modals.save.dialog('open');
     }
 
-  }
-
-
-  save() {
-
-    let graphTitle = document.querySelector('#graph-title').value;
-    let graphExcerpt = document.querySelector('#graph-excerpt').value;
-
-    this._application.getSchema().setTitle(graphTitle);
-    this._application.getSchema().setExcerpt(graphExcerpt);
-    this._application.getSchema().save();
-
-
-    console.log('%c' + "saving data", 'color: #0bf; font-size: 1rem; background-color:#fff');
-    console.log(this._application.getXML());
-
-    this._application.post(
-      this._application._configuration.apiBaseURL + '/save',
-      {
-        xml: this._application.getXML(),
-        postId: this._application._configuration.postId,
-        title: graphTitle,
-        excerpt: graphExcerpt
-      }
-    )
   }
 
 
@@ -63,7 +47,13 @@ class ApplicationActions
         'closeOnEscape' : true,
         'buttons'       : {
           "Save": () => {
-            this.save();
+            let title = document.querySelector('#graph-title').value;
+            let excerpt = document.querySelector('#graph-excerpt').value;
+
+            this._application.getSchema().setTitle(title);
+            this._application.getSchema().setExcerpt(excerpt);
+
+            this._application.getSchema().save();
             this._modals.save.dialog('close');
           },
           "Cancel": () => {

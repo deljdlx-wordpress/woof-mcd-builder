@@ -34,7 +34,10 @@ class Schema
   }
 
   setExcerpt(excerpt) {
-    this._excerpt = excerpt;
+
+    let node = document.createElement('span');
+    node.innerHTML = excerpt;
+    this._excerpt = node.textContent;
     return this;
   }
 
@@ -83,7 +86,8 @@ class Schema
     this.setXML(xml);
     this.setTitle(response.title.rendered);
     this.setId(response.id)
-    // this.setExcerpt();
+
+    this.setExcerpt(response.excerpt.rendered);
   }
 
 }

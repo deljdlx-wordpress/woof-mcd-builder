@@ -88,7 +88,9 @@ class RestAPI extends WoofRestApi
         return $this->updatePost(
             $data['postId'],
             [
-                'post_content' => $xml
+                'post_content' => $xml,
+                'post_title' => $data['title'],
+                'post_excerpt' => $data['excerpt'],
             ]
         );
     }
