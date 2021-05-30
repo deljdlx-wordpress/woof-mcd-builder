@@ -2,9 +2,6 @@ class ActionManager
 {
 
   _application;
-  _modals = {};
-
-
   _actions = {};
 
   constructor(application) {
