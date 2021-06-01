@@ -15,6 +15,12 @@ $myListTable->setEditURLCallBack(function($item) {
     return sprintf('<a href="?page=woof-schema-builder--builder&post=%s">Edit</a>', $item['id']);
 });
 
+/*
+$myListTable->setDeleteURLCallBack(function($item) {
+    return sprintf('<a href="?page=woof-schema-builder--delete&post=%s">Delete</a>', $item['id']);
+});
+*/
+
 
 
 

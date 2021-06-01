@@ -31,6 +31,7 @@ class AdministrationSection extends WoofAdministrationSection
 
         );
         $this->addPage($schemaBuilder);
+
     }
 }
 

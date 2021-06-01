@@ -3,6 +3,7 @@
 namespace WoofSchemaBuilder\Page;
 
 use Woof\AdministrationPage;
+use Woof\Model\Wordpress\Post;
 
 use function Woof\slugify;
 
@@ -10,6 +11,24 @@ class SchemaBuilder extends AdministrationPage
 {
 
     protected $template = '/views/admin-schema-builder.php';
+
+    public function initialize()
+    {
+        $action = filter_input(INPUT_GET, 'action');
+
+        if($action === 'delete') {
+            $this->delete();
+        }
+    }
+
+    protected function delete()
+    {
+        $postId = filter_input(INPUT_GET, 'post');
+
+        $post = new Post();
+        $post->loadById($postId);
+        $post->delete();
+    }
 
 
     public function display($args = [])
@@ -22,9 +41,6 @@ class SchemaBuilder extends AdministrationPage
         $args['baseURL'] = get_home_url();
         $args['apiBaseURL'] = get_home_url() . '/wp-json/woof-shema-builder/v1';
         $args['wpApiBaseURL'] = get_home_url() . '/wp-json/wp/v2';
-
-
-
 
         parent::display($args);
     }
